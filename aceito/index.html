@@ -63,7 +63,54 @@
   <script src="/config/texts/index.js"></script><script src="/config/texts/home/text1.js" defer=""></script><script src="/config/texts/home/text2.js" defer=""></script><script src="/config/texts/home/text-button.js" defer=""></script><script src="/config/texts/carousel/text1.js" defer=""></script><script src="/config/texts/carousel/text2.js" defer=""></script><script src="/config/texts/carousel/text-button.js" defer=""></script><script src="/config/texts/declaration/text1.js" defer=""></script><script src="/config/texts/declaration/text2.js" defer=""></script><script src="/config/texts/declaration/text3.js" defer=""></script><script src="/config/texts/declaration/text4.js" defer=""></script><script src="/config/texts/declaration/text-button.js" defer=""></script><script src="/config/texts/tempojuntos/text1.js" defer=""></script><script src="/config/texts/tempojuntos/text2.js" defer=""></script>
 
 </head>
+<style>
+  .heart-pulse {
+    width: 100px;
+    height: 90px;
+    position: relative;
+    transform: scale(1);
+    animation: pulse 0.8s infinite;
+  }
 
+  .heart-pulse::before,
+  .heart-pulse::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 100px;
+    height: 90px;
+    background: red;
+    border-radius: 50px 50px 0 0;
+  }
+
+  .heart-pulse::before {
+    left: 0;
+    transform: rotate(-45deg);
+    transform-origin: 0 100%;
+  }
+
+  .heart-pulse::after {
+    left: 0;
+    transform: rotate(45deg);
+    transform-origin: 100% 100%;
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .hide {
+    display: none;
+  }
+</style>
 <body class="mx-auto w-full">
   <main class="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-900 antialiased w-full">
     <div class="flex justify-between px-4 mx-auto w-full ">
@@ -115,14 +162,26 @@
         </p>
 
         <div class="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-start sm:space-y-0 sm:space-x-4">
-          <a href="/aceito/" class="button yes inline-flex no-underline justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
-            Sim, aceito 💘
-          </a>
+          <a id="acceptBtn" class="button yes inline-flex no-underline justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
+          Sim, aceito 💘
+         </a>
+          <div id="heartAnimation" class="heart-pulse mx-auto my-8 hidden"></div>
           <button id="no" class="button no inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
 
-            Não 😅
+            Não aceito não como resposta 😅
           </button>
         </div>
+        <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const btn = document.getElementById("acceptBtn");
+    const heart = document.getElementById("heartAnimation");
+
+    btn.addEventListener("click", function () {
+      btn.classList.add("hide"); // esconde o botão
+      heart.classList.remove("hidden"); // mostra o coração animado
+    });
+  });
+</script>
     </article></div>
 
     <!-- Share  -->
